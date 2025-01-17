@@ -18,15 +18,16 @@ export const useStore = defineStore('store', () => {
     saveCartToLocalStorage();
   }
 
-  function saveCartToLocalStorage() {
-     cart.value = {}; 
-     saveCartToLocalStorage();  
-  }
-
   function clearCart() {
     cart.value.clear(); 
     saveCartToLocalStorage(); 
   }  
+
+  function saveCartToLocalStorage() {
+    if (user.value && user.value.email) {
+      localStorage.setItem(`cart_${user.value.email}`, JSON.stringify(Object.fromEntries(cart.value)));
+    }
+  }
 
   return { user, cart, addToCart, removeFromCart, clearCart };
 });
