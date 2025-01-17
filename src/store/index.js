@@ -18,10 +18,10 @@ export const useStore = defineStore('store', () => {
     saveCartToLocalStorage();
   }
 
-  // function saveCartToLocalStorage() {
-  //   cart.value = {}; 
-  //   saveCartToLocalStorage();  
-  // }
+  function saveCartToLocalStorage() {
+     cart.value = {}; 
+     saveCartToLocalStorage();  
+  }
 
   function clearCart() {
     cart.value.clear(); 
