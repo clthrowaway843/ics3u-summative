@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router';
 import { useStore } from '../store';
 const registrationStore = useStore();
+const store = useStore();
 </script>
 
 <template>
@@ -15,7 +16,7 @@ const registrationStore = useStore();
             <RouterLink to="/register" class="button register">Register</RouterLink>
           </li>
           <li v-if="$route.path === '/movies' || $route.path === '/setting' || $route.path === '/cart'">
-            <h1 class="email">{{ `Hello ${registrationStore.firstName}!` }}</h1>
+            <h1 class="email">{{ `Hello ${store.user?.displayName}!` }}</h1>
             <RouterLink to="/setting" class="button setting">Setting</RouterLink>
             <RouterLink to="/" class="button setting">Logout</RouterLink>
             <RouterLink to="/cart" class="button cart">Cart</RouterLink>
