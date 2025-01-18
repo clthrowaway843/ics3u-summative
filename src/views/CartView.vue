@@ -15,6 +15,9 @@ const router = useRouter();
             <h1>{{ value.title }}</h1>
             <button @click="store.removeFromCart(key)">Remove</button>
         </div>
+        <div v-if="store.checkoutCompleted" class="message">
+            <p>Thank you for your purchase!</p>
+        </div>
         <div class="checkout">
             <button @click="store.clearCart()">Checkout</button>
         </div>
