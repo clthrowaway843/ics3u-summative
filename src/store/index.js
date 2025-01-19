@@ -61,11 +61,27 @@ export const useStore = defineStore('store', () => {
       localStorage.removeItem(`cart_${user.value?.email}`);
 
       // Redirect user to login page or home page
-      router.push("/login"); // Or to '/' if you prefer the home page
+      router.push("/"); // Or to '/' if you prefer the home page
     } catch (error) {
       console.error("Error during logout:", error);
     }
   };
 
-  return { user, cart, addToCart, removeFromCart, logout };
+  const userAuthorized = new Promise((resolve, reject) => {
+    onAuthStateChanged(auth, (firebaseUser) => {
+      if (firebaseUser) {
+        user.value = firebaseUser;
+        const storedCart = localStorage.getItem(`cart_${firebaseUser.email}`);
+        cart.value = storedCart ? new Map(Object.entries(JSON.parse(storedCart))) : new Map();
+        resolve();
+      } else {
+        user.value = null;
+        cart.value = new Map();
+        resolve();
+      }
+    }, reject);
+  });
+
+  return { user, cart, addToCart, removeFromCart, logout, userAuthorized};
 });
+

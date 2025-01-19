@@ -1,6 +1,6 @@
 <script setup>
 import { RouterLink } from 'vue-router';
-import { useStore } from "../stores/store"; // Import your store
+import { useStore } from '../store';
 const store = useStore();
 
 // Call the logout method from the store
